@@ -11,7 +11,7 @@ class ProductController extends Controller
     public function add(){
         $r=request(); //received the data by Get or Post mothod
         $image=$r->file('product-image');
-        $image->move('image',$image->getClientOriginalName()); //image is the location
+        $image->move('images',$image->getClientOriginalName()); //image is the location
         $imageName=$image->getClientOriginalName();
 
         $addProduct=Product::create([
@@ -19,7 +19,7 @@ class ProductController extends Controller
             'description'=>$r->productDescription,
             'quantity'=>$r->productQuantity,
             'price'=>$r->productPrice,
-            'category'=>$r->categoryID,
+            'categoryID'=>$r->CategoryID,
             'image'=>$imageName,
         ]);
         Return view('addProduct');

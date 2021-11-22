@@ -1,3 +1,4 @@
+
 @extends('layout')
 @section('content')
 <div class="row">
@@ -5,7 +6,7 @@
     <div class="col-sm-6">
         <br><br>
         <h3>Create New Category</h3>
-        <form action="{{route('addCategory')}}" method="POST">
+        <form action="{{ route('addCategory') }}" method="POST">
             @CSRF
             <div class="form-group">
                 <label for="categoryName">Category Name</label>
