@@ -23,4 +23,9 @@ class ProductController extends Controller
         ]);
         Return view('addProduct');
     }
+
+    public function view(){
+        $viewProduct=Product::all();
+        Return view('showProduct')->with('products',$viewProduct);
+    }
 }
