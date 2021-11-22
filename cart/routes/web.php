@@ -24,10 +24,11 @@ Route::get('/addCategory', function () {
 Route::get('/addProduct', function () {
     return view('addProduct');
 });
-
 Route::post('/addCategory/store',[App\Http\Controllers\CategoryController::class,'add'])->name('addCategory');
 
 Route::post('/addProduct/store',[App\Http\Controllers\ProductController::class,'add'])->name('addProduct');
+
+Route::get('/showCategory',[App\Http\Controllers\CategoryController::class,'view'])->name('showCategory');
 
 Auth::routes();
 

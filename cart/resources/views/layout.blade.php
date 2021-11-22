@@ -51,6 +51,8 @@
 
 @yield('content')
 
+
+
  <!-- footer -->
  <!-- Footer -->
 <footer class="bg-dark text-center text-white">
