@@ -11,18 +11,13 @@
     <title>Southern Online</title>
   </head>
   <body>
-    @if(Session::has('success'))
-      <div class="alert alert-success" role="alert">
-        {{ Session::get('success') }}
-      </div>
-    @endif
+    
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <img src="{{asset('images/logo.png')}}" class="rounded-circle" alt="Southern Online" width="30">&nbsp;
   <a class="navbar-brand" href="#">Southern Online</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
@@ -53,7 +48,11 @@
     </button>
   </div>
 </nav>
-
+@if(Session::has('success'))
+      <div class="alert alert-success" role="alert">
+        {{ Session::get('success') }}
+      </div>
+    @endif
 @yield('content')
 
 
