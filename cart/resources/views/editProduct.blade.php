@@ -4,29 +4,33 @@
     <div class="col-sm-3"></div>
     <div class="col-sm-6">
         <br><br>
-        <h3>Create New Product</h3>
+        <h3>Update Product</h3>
         <form action="{{ route('addProduct') }}" method="POST" enctype="multipart/form-data" >
            @CSRF
+
+           @foreach($products as $product)
             <div class="form-group">
                 <label for="productName">Product Name</label>
-                <input type="text" class="form-control" id="productName" name="productName">                
+                <input type="text" class="form-control" id="productName" name="productName" value="{{$product->name}}"> 
+                <input type="hidden" name="productID" id="productID" value="{{$product->id}}">               
             </div>
             <div class="form-group">
                 <label for="productDescription">Product Desciption</label>
-                <input type="text" class="form-control" id="productDescription" name="productDescription">                
+                <input type="text" class="form-control" id="productDescription" name="productDescription" value="{{$product->description}}" >                
             </div>
             <div class="form-group">
                 <label for="productPrice">Product Price</label>
-                <input type="number" class="form-control" id="productPrice" name="productPrice" min="0">                
+                <input type="number" class="form-control" id="productPrice" name="productPrice" min="0" value="{{$product->price}}">                
             </div>
             <div class="form-group">
                 <label for="productPrice">Product Quantity</label>
-                <input type="number" class="form-control" id="productQuantity" name="productQuantity" min="0">                
+                <input type="number" class="form-control" id="productQuantity" name="productQuantity" min="0" value="{{$product->quantity}}">                
             </div>
 
             <div class="form-group">
                 <label for="productDescription">Product Image</label>
-                <input type="file" class="form-control" id="productImage" name="productImage">                
+                <img src="{{asset('images')}}/{{$product->image}}" alt="" class="img-fluid" width="100">
+                <input type="file" class="form-control" id="productImage" name="productImage" value="">                
             </div>
             <div class="form-group">
                 <label for="catID">Category</label>
@@ -36,7 +40,8 @@
                     @endforeach
                 </select>                
             </div>
-            <button type="submit" class="btn btn-primary">Add New</button>
+            @endforeach
+            <button type="submit" class="btn btn-primary">Update</button>
         </form>
         <br><br>
     </div>

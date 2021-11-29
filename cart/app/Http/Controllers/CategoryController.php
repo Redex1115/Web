@@ -13,6 +13,7 @@ class CategoryController extends Controller
         $addCategory=Category::create([
             'name'=>$r->categoryName,
         ]);
+        Session::flash('success',"Category create successfully!");
         Return redirect()->route('showCategory');
     }
 

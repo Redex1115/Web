@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use App\Models\Product;
+use Session;
+use App\Models\Category;
 
 class ProductController extends Controller
 {
@@ -21,11 +23,34 @@ class ProductController extends Controller
             'CategoryID'=>$r->CategoryID,
             'image'=>$imageName,
         ]);
-        Return view('addProduct');
+        Session::flash('success',"Product create successfully!");
+        Return redirect()->route('showProduct');
     }
 
     public function view(){
-        $viewProduct=Product::all();
+        //$viewProduct=Product::all();
+        $viewProduct=DB::table('products')
+        ->leftjoin('categories','categories.id','=','products.CategoryID')
+        ->select('products.*','categories.name as catName')
+        ->get();
+
         Return view('showProduct')->with('products',$viewProduct);
     }
+
+
+    public function delete($id){
+        
+        $deleteProduct=Product::find($id);
+        $deleteProduct->delete();
+        Session::flash('success',"Product was delete successfully!");
+        Return redirect()->route('showProduct');
+    }
+
+    public function edit($id){
+
+        $products=Product::all()->where('id',$id);
+        Return view('editProduct')->with('products',$products)
+                                  ->with('categoryID',Category::all());
+    }
+
 }
