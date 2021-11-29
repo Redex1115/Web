@@ -50,7 +50,29 @@ class ProductController extends Controller
 
         $products=Product::all()->where('id',$id);
         Return view('editProduct')->with('products',$products)
-                                  ->with('categoryID',Category::all());
+        ->with('categoryID',Category::all());
+    }
+
+    public function update(){
+
+        $r=request();
+        $products=Product::find($r->productID);
+
+        if($r->file('productImage')!=''){
+            $image=$r->file('productImage');        
+            $image->move('images',$image->getClientOriginalName());                
+            $imageName=$image->getClientOriginalName();
+            $products->image=$imageName; 
+        }
+
+        $products->name=$r->productName;
+        $products->description=$r->productDescription;
+        $products->price=$r->productPrice;
+        $products->quantity=$r->productQuantity;
+        $products->CategoryID=$r->CategoryId;
+        $products=save();
+
+        Return rediect()->route('showProduct');
     }
 
 }
