@@ -13,6 +13,7 @@
                         <td>Desciption</td>
                         <td>Price</td>
                         <td>Quantity</td>
+                        <td>Action</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -24,6 +25,7 @@
                         <td>{{$product->description}}</td>
                         <td>{{$product->price}}</td>
                         <td>{{$product->quantity}}</td>
+                        <td><a href="{{ route('product.detail',['id'=>$product->id])}}" class="btn btn-info btn-xs">Detail</a></td>
                     </tr>
                     @endforeach
                 </tbody>
