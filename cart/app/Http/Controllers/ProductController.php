@@ -37,6 +37,10 @@ class ProductController extends Controller
         Return view('showProduct')->with('products',$viewProduct);
     }
 
+    public function viewProduct(){
+        $products=Product::all();
+        Return view('viewProduct')->with('products',$products);
+    }
 
     public function delete($id){
         
@@ -78,6 +82,18 @@ class ProductController extends Controller
     public function productdetail($id){
         $products=Product::all()->where('id',$id);
         return view('productDetail')->with('products',$products);
+    }
+
+    public function searchProduct(){
+
+        $r=request();
+
+        $keyword=$r->keyword;
+
+        $products=DB::table('products')->where('name','like','%'.$keyword.'%')->get();
+
+        return view('viewProduct')->with('products',$products);
+
     }
 
 }
