@@ -7,24 +7,20 @@
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <td>ID</td>
                         <td>Image</td>
                         <td>Product Name</td>
                         <td>Desciption</td>
                         <td>Price</td>
-                        <td>Quantity</td>
                         <td>Action</td>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($products as $product)
                     <tr>
-                        <td>{{$product->id}}</td>
                         <td><img src="{{ asset('images/') }}/{{$product->image}}" width="100" class="img-fluid" alt=""></td>
                         <td>{{$product->name}}</td>
                         <td>{{$product->description}}</td>
-                        <td>{{$product->price}}</td>
-                        <td>{{$product->quantity}}</td>
+                        <td>RM {{$product->price}}</td>
                         <td><a href="{{ route('product.detail',['id'=>$product->id])}}" class="btn btn-info btn-xs">Detail</a></td>
                     </tr>
                     @endforeach

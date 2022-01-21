@@ -41,7 +41,7 @@
                         <td>{{$cart->price}}</td>
                         <td>{{$cart->cartQTY}}</td>
                         <td>RM {{$cart->price*$cart->cartQTY}}</td>
-                        <td><a href="{{ route('delete.cart.item',['id'=>$cart->id])}}" class="btn btn-danger btn-xs" onClick="return confirm('Are you confirm to delete?')">Delete</a></td> 
+                        <td><a href="{{ route('delete.cart.item',['id'=>$cart->cid])}}" class="btn btn-danger btn-xs" onClick="return confirm('Are you confirm to delete?')">Delete</a></td> 
                     </tr>
                     @endforeach
                     <tr>
@@ -53,15 +53,18 @@
             </table>
         <br><br>
     </div>
+    <div class="col-sm-2">
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8">
+        {{ $carts->links('pagination::bootstrap-4') }}
+    </div>
     <div class="col-sm-2"></div>
 </div>
-<div class="row">
-            <div class="col-sm-2"></div>
-            <div class="col-sm-8">
-                {{ $carts->links('pagination::bootstrap-4')}}
-            </div>
-            <div class="col-sm-2"></div>
-        </div>
+
 <div class="row">
     <div class="col-sm-1"></div>
     <div class="col-sm-1"></div>

@@ -9,13 +9,14 @@ use Auth;
 use App\Models\myCart;
 use App\Models\Product;
 
-
 class CartController extends Controller
 {
     
     public function __construct(){
         $this->middleware('auth'); 		
     }
+
+    
 
     public function add(){
         $r=request();
@@ -34,9 +35,11 @@ class CartController extends Controller
         ->select('my_carts.quantity as cartQTY','my_carts.id as cid', 'products.*')
         ->where('my_carts.orderID','=','')//if '' means haven't make payment
         ->where('my_carts.userID','=',Auth::id()) //item match with current login user
-        //->get();
-        ->paginate(5); //5 = how many item in one page
+        //->get();       
+        ->paginate(5);//5 = five items in one page
 
+        $this->cartItem(); //call function calculate no. cart item
+       
         return view('myCart')->with('carts',$carts);
     }
 
@@ -45,5 +48,24 @@ class CartController extends Controller
         $deleteItem->delete();//delete record
         Session::flash('success','Item was remove successfully!');
         Return redirect()->route('show.my.cart');
+    }
+
+    public function cartItem(){
+        $noItem=DB::table('my_carts')
+        ->leftjoin('products','products.id','=','my_carts.productID')
+        ->select(DB::raw('COUNT(*) as count_item'))
+        ->where('my_carts.orderID','=','')//if '' means haven't make payment
+        ->where('my_carts.userID','=',Auth::id()) //item match with current login user
+        ->groupBy('my_carts.userID')
+        ->first();
+
+        if($noItem == ""){
+            $cartItem=0;
+        }
+        else{
+           $cartItem=$noItem->count_item; 
+        }
+        
+        Session()->put('cartItem',$cartItem);//assign value to session variable cartItem
     }
 }
